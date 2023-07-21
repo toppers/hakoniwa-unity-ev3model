@@ -64,10 +64,10 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts.TestDriver
         {
             return false;
         }
-
+        public int sensor_id = 0;
         public void UpdateSensorValues()
         {
-            if (this.pdu_writer.GetReadOps().Refs("touch_sensors")[0].GetDataUInt32("value") == 0)
+            if (this.pdu_writer.GetReadOps().Refs("touch_sensors")[this.sensor_id].GetDataUInt32("value") == 0)
             {
                 this.isTouched = false;
             }

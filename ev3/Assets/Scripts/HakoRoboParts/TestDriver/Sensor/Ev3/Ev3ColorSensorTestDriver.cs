@@ -11,13 +11,12 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts.TestDriver
 {
     public class Ev3ColorSensorTestDriver : MonoBehaviour, IRobotPartsSensor, IRobotPartsConfig
     {
-        private Renderer my_renderer;
+        public Renderer my_renderer;
         private Color initial_color;
         private GameObject root;
         private PduIoConnector pdu_io;
         private IPduWriter pdu_writer;
         private string root_name;
-        public bool isTouched = false;
 
         public int update_cycle = 10;
         public string topic_name = "ev3_sensor";
@@ -64,19 +63,24 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts.TestDriver
         {
             return false;
         }
-
+        public int sensor_id = 0;
+        public Color color;
         public void UpdateSensorValues()
         {
-            int rgb_r = (int)this.pdu_writer.GetReadOps().Refs("color_sensors")[0].GetDataUInt32("rgb_r");
-            int rgb_g = (int)this.pdu_writer.GetReadOps().Refs("color_sensors")[0].GetDataUInt32("rgb_g");
-            int rgb_b = (int)this.pdu_writer.GetReadOps().Refs("color_sensors")[0].GetDataUInt32("rgb_b");
-            //Debug.Log("r=" + rgb_r + " g=" + rgb_g + " b=" + rgb_b);
-            GetComponent<Renderer>().material.color = new Color(rgb_r, rgb_g, rgb_b);
+            float rgb_r = (float)this.pdu_writer.GetReadOps().Refs("color_sensors")[this.sensor_id].GetDataUInt32("rgb_r");
+            float rgb_g = (float)this.pdu_writer.GetReadOps().Refs("color_sensors")[this.sensor_id].GetDataUInt32("rgb_g");
+            float rgb_b = (float)this.pdu_writer.GetReadOps().Refs("color_sensors")[this.sensor_id].GetDataUInt32("rgb_b");
+            Debug.Log("robo:" + roboname + " r=" + rgb_r + " g=" + rgb_g + " b=" + rgb_b);
+            this.color = new Color(rgb_r/255f, rgb_g / 255f, rgb_b / 255f);
             //Debug.Log("MY reflect=" + this.pdu_writer.GetReadOps().Refs("color_sensors")[0].GetDataUInt32("reflect"));
         }
         public RoboPartsConfigData[] GetRoboPartsConfig()
         {
             return new RoboPartsConfigData[0];
+        }
+        void Update()
+        {
+            this.my_renderer.material.color = this.color;
         }
 
     }
