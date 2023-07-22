@@ -161,13 +161,7 @@ https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/20c2efc7-ad3e-4
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/d3664c38-0278-47c4-97e0-9819fb1cb974)
 
 なお、タッチセンサ２の方は、モーターに力をかけると、真ん中のキューブが同様に反応します。
-
-デモ：
-
-https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/64aaa465-a012-4a06-9ba8-ca670d0b178d
-
-
-カラーセンサが認識した色に応じて、下図のようにテストドライバの右上のキューブが変化します。
+また、カラーセンサが認識した色に応じて、下図のようにテストドライバの右上のキューブが変化します。
 
 デモ：
 
