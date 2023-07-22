@@ -112,11 +112,58 @@ Unityの再生ボタンをクリックします。
 イエローを認識：
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/d22d5786-0e7d-414c-a665-45f49f640dd1)
 
+デモ：
+
+https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/20c2efc7-ad3e-4cce-8f80-8da2e8184849
+
 
 ## 信号モデル
 
+信号モデルは、下図のものです。
+
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/1fdca183-2ee1-4c52-a19f-ca38c3403a7d)
+
+この電車モデルにはタッチセンサが２個ついています。画面左上のボタン部分をクリックすると反応します。
+
+タッチセンサ１：
 
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/f50d1181-c6b2-451e-9d90-c4ba0253e970)
 
+タッチセンサ２：
+
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/3c3caa94-bfb7-4e8a-b4c8-7aba54cea8df)
+
+以下は、電車モデルのテストドライバです。
+
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/a047ff81-b18e-4a67-ac95-57a305b217e9)
+
+
+キーボード操作で、信号を変化させることができます。
+
+* Fキー押下
+  * モータにかける力を 10 にします。
+* Gキー押下
+  * モータにかける力を 0 にします。
+
+信号モデルのタッチセンサ１をマウスクリックすると、下図のようにテストドライバの左上のキューブが赤色になります。
+
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/114edf4e-d870-4b0b-acd8-cf525126382d)
+
+
+離すと、下図のようにテストドライバの左上のキューブが青色になります。
+
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/d3664c38-0278-47c4-97e0-9819fb1cb974)
+
+なお、タッチセンサ２の方は、モーターに力をかけると、真ん中のキューブが同様に反応します。
+
+デモ（前方からみたもの）：
+
+https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/64aaa465-a012-4a06-9ba8-ca670d0b178d
+
+
+デモ（後方からみたもの）：
+
+https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/14b99285-ffa3-4847-94c0-05cbd8abf157
+
+
+
