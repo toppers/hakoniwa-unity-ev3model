@@ -70,7 +70,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts.TestDriver
             float rgb_r = (float)this.pdu_writer.GetReadOps().Refs("color_sensors")[this.sensor_id].GetDataUInt32("rgb_r");
             float rgb_g = (float)this.pdu_writer.GetReadOps().Refs("color_sensors")[this.sensor_id].GetDataUInt32("rgb_g");
             float rgb_b = (float)this.pdu_writer.GetReadOps().Refs("color_sensors")[this.sensor_id].GetDataUInt32("rgb_b");
-            Debug.Log("robo:" + roboname + " r=" + rgb_r + " g=" + rgb_g + " b=" + rgb_b);
+            //Debug.Log("robo:" + roboname + " r=" + rgb_r + " g=" + rgb_g + " b=" + rgb_b);
             this.color = new Color(rgb_r/255f, rgb_g / 255f, rgb_b / 255f);
             //Debug.Log("MY reflect=" + this.pdu_writer.GetReadOps().Refs("color_sensors")[0].GetDataUInt32("reflect"));
         }

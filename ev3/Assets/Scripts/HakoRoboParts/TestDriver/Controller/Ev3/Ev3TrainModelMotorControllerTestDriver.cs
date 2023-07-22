@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts.TestDriver
 {
-    public class Ev3MotorControllerTestDriver : MonoBehaviour, IRobotPartsController, IRobotPartsConfig
+    public class Ev3TrainModelMotorControllerTestDriver : MonoBehaviour, IRobotPartsController, IRobotPartsConfig
     {
         private GameObject root;
         private string root_name;
@@ -68,7 +68,6 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts.TestDriver
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("Space key is pressed");
                 this.target_velocity = 0;
             }
         }
