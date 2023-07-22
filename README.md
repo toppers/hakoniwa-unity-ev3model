@@ -77,7 +77,7 @@ Unityの再生ボタンをクリックします。
 
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/871aed5e-8741-4dba-a16a-8da5e332ea55)
 
-この電車モデルにはタッチセンサがついています。以下の画面のボタン部分をクリックすると反応します。
+この電車モデルにはタッチセンサがついています。画面右上のボタン部分をクリックすると反応します。
 
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/cfd9df48-18e0-4855-85d2-0245b87df3c8)
 
@@ -89,6 +89,23 @@ Unityの再生ボタンをクリックします。
 
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/f17de823-ac97-4365-a29b-8a82854de25d)
 
+
+キーボード操作で、電車を前後に移動できます。
+
+* ↑キー押下
+  * モータにかける力を +1 します。
+* ↓キー押下
+  * モータにかける力を ―1 します。
+* スペースキー押下
+  * モータにかける力を 0 にします。
+
+電車モデルのタッチセンサをマウスクリックすると、下図のようにテストドライバの左上のキューブが赤色になります。
+
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/5abe4c7e-da7b-4591-8a88-2d52d3ae3c07)
+
+離すと、下図のようにテストドライバの左上のキューブが青色になります。
+
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/89a2ba77-53b3-4a73-b482-811cce522b66)
 
 
 ## 信号モデル
