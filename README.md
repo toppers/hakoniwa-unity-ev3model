@@ -133,6 +133,12 @@ https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/20c2efc7-ad3e-4
 
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/3c3caa94-bfb7-4e8a-b4c8-7aba54cea8df)
 
+
+また、信号モデルには、現在の信号読み取り用のカラーセンサが下図のようについています。
+
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/0ec675b9-fd98-4bab-a6db-fcaeba21fae3)
+
+
 以下は、電車モデルのテストドライバです。
 
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/a047ff81-b18e-4a67-ac95-57a305b217e9)
@@ -156,12 +162,14 @@ https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/20c2efc7-ad3e-4
 
 なお、タッチセンサ２の方は、モーターに力をかけると、真ん中のキューブが同様に反応します。
 
-デモ（前方からみたもの）：
+デモ：
 
 https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/64aaa465-a012-4a06-9ba8-ca670d0b178d
 
 
-デモ（後方からみたもの）：
+カラーセンサが認識した色に応じて、下図のようにテストドライバの右上のキューブが変化します。
+
+デモ：
 
 https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/14b99285-ffa3-4847-94c0-05cbd8abf157
 
