@@ -18375,8 +18375,8 @@ MonoBehaviour:
       class_path: 
       conv_class_name: Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter
       conv_class_path: 
-      channel_id: 2
-      pdu_size: 1024
+      channel_id: 0
+      pdu_size: 196
     rpc_pdu_writers:
     - type: ev3_msgs/Ev3PduSensor
       org_name: ev3_sensor
@@ -18385,8 +18385,8 @@ MonoBehaviour:
       class_path: 
       conv_class_name: Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter
       conv_class_path: 
-      channel_id: 3
-      pdu_size: 1024
+      channel_id: 1
+      pdu_size: 248
       write_cycle: 1
       method_type: UDP
 --- !u!1 &6383133121799497634
