@@ -6,7 +6,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.EV3
 {
     public class GearSensor : MonoBehaviour
     {
-        private bool isTouched = false;
+        public bool isTouched = false;
 
         public bool IsTouched()
         {
