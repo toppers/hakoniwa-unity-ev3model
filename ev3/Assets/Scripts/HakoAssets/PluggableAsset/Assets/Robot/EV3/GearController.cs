@@ -1,10 +1,11 @@
+using Hakoniwa.PluggableAsset.Assets.Robot.Parts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.EV3
 {
-    public class GearController : MonoBehaviour
+    public class GearController : MonoBehaviour, IRobotPartsSensor
     {
         public GameObject mover;
         public float rotation_angle_per_sec = 1f;
@@ -14,15 +15,20 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.EV3
         private float currentAngle = 0;
         private GearSensor[] sensors;
 
-        private void Start()
+        public void Initialize(object root)
         {
+            this.isMovingMode = false;
             this.rotation_angle_per_fixupdate = rotation_angle_per_sec / Time.fixedDeltaTime;
             this.sensors = this.GetComponentsInChildren<GearSensor>();
-            //Debug.Log("start Gear Control: sensor num=" + this.sensors.Length);
+            foreach (var entry in sensors)
+            {
+                entry.isTouched = false;
+            }
+            //Debug.Log("Initialize Gear Control: sensor num=" + this.sensors.Length);
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        public void UpdateSensorValues()
         {
             if (this.isMovingMode)
             {
@@ -50,6 +56,16 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.EV3
 
         }
 
+        public bool isAttachedSpecificController()
+        {
+            return false;
+        }
+
+
+        public RosTopicMessageConfig[] getRosConfig()
+        {
+            return null;
+        }
     }
 
 }
