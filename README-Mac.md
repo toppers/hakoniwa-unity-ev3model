@@ -7,7 +7,7 @@
 
 - Homebrew
 - Blender
-　　- 3.0 以降
+  - 3.0 以降
 - Unity Hub
 - Unity（各CPUアーキテクチャに対応したもの）
   - 2021.3.17f1 以降
