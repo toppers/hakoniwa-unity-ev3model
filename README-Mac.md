@@ -190,7 +190,7 @@ env = hako_env.make("EV3TrainModelWithBaggage", "ev3")
 
 ## 箱庭とPythonプログラムを起動する
 
-以下のコマンドで箱庭環境を起動します。
+Pythonプログラムを使ったシミュレーションを行う場合は、以下のコマンドで箱庭環境を起動します。
 
 ```
 bash native/template/runtime/ai/mac/run.bash
@@ -205,6 +205,106 @@ START TEST
 INFO: delWithBaggageithBaggage create_lchannel: logical_id=0 real_id=0 size=196
 WAIT START:
 ```
+
+
+## 箱庭とAthrill上のプログラム（EV3RTで動作するプログラム）を起動する
+
+Athrill上で動作するプログラムを使ったシミュレーションを行う場合は、以下のパラメータファイルの編集をします。
+
+* workspace/runtime/asset_def.txt
+* workspace/runtime/params/train_slow_stop-1/device_config.txt
+* workspace/runtime/params/train_slow_stop-1/memory.txt
+* workspace/runtime/params/train_slow_stop-1/proxy_config.json
+
+### workspace/runtime/asset_def.txt
+
+変更前：
+```
+dev/ai/ai_qtable.py
+```
+
+変更後：
+```
+train_slow_stop:1:
+```
+
+
+### workspace/runtime/params/train_slow_stop-1/device_config.txt
+
+変更前：
+```
+DEBUG_FUNC_HAKO_ROBO_NAME       EV3TrainModel
+```
+
+変更後：
+```
+DEBUG_FUNC_HAKO_ROBO_NAME       EV3TrainModelWithBaggage
+```
+
+### workspace/runtime/params/train_slow_stop-1/memory.txt
+
+変更前：
+```
+DEV,  0x090F0000, /usr/local/lib/hakoniwa/libhakopdu.so
+DEV,  0x900F0000, /usr/local/lib/hakoniwa/libhakotime.so
+```
+
+変更後：
+```
+DEV,  0x090F0000, /usr/local/lib/hakoniwa/libhakopdu.dylib
+DEV,  0x900F0000, /usr/local/lib/hakoniwa/libhakotime.dylib
+```
+
+### workspace/runtime/params/train_slow_stop-1/proxy_config.json
+
+変更前：
+```
+    "asset_name": "athrill-train_slow_stop-1",
+    "robo_name": "EV3TrainModel",
+    "target_exec_dir": "/root/workspace/runtime/run/train_slow_stop-1",
+    "target_bin_path": "/root/athrill-target-v850e2m/athrill/bin/linux/athrill2,
+    "target_options": [
+        "-c1",
+        "-t",
+        "-1",
+        "-d",
+        "/root/workspace/params/train_slow_stop-1/device_config.txt",
+        "-m",
+        "/root/workspace/params/train_slow_stop-1/memory.txt",
+        "/root/workspace/dev/src/train_slow_stop/asp"
+    ],
+```
+
+変更後：
+```
+    "asset_name": "athrill-train_slow_stop-1",
+    "robo_name": "EV3TrainModelWithBaggage",
+    "target_exec_dir": "/Users/tmori/project/oss/hakoniwa-base/workspace/runtime/run/train_slow_stop-1",
+    "target_bin_path": "/usr/local/bin/hakoniwa/athrill2",
+    "target_options": [
+        "-c1",
+        "-t",
+        "-1",
+        "-d",
+        "/Users/tmori/project/oss/hakoniwa-base/workspace/runtime/params/train_slow_stop-1/device_config.txt",
+        "-m",
+        "/Users/tmori/project/oss/hakoniwa-base/workspace/runtime/params/train_slow_stop-1/memory.txt",
+        "/Users/tmori/project/oss/hakoniwa-base/workspace/dev/src/train_slow_stop/asp"
+    ],
+```
+
+次に、以下のコマンドプログラムをビルドします。(train_slow_stopはアプリケーション名です)
+
+```
+bash docker/build.bash train_slow_stop
+```
+
+ただし、事前に以下のコマンドで docker イメージを取得してください。
+
+```
+bash docker/pull-image.bash dev
+```
+
 
 ## Unityのシミュレーションを開始する
 
