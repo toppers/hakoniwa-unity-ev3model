@@ -183,7 +183,7 @@ env = hako_env.make("EV3TrainModel", "ev3")
 
 変更後：
 ```
-env = hako_env.make("EV3TrainModelWithBaggageithBaggage", "ev3")
+env = hako_env.make("EV3TrainModelWithBaggage", "ev3")
 ```
 
 # シミュレーション実行方法
