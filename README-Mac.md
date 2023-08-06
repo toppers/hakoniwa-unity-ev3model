@@ -275,6 +275,8 @@ DEV,  0x900F0000, /usr/local/lib/hakoniwa/libhakotime.dylib
     ],
 ```
 
+`/Users/tmori/project/oss/hakoniwa-base` は、ご自分の環境に合わせて変更してください。
+
 変更後：
 ```
     "asset_name": "athrill-train_slow_stop-1",
