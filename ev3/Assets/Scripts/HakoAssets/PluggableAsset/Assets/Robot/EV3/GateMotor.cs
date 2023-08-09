@@ -126,10 +126,9 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.EV3
             //Debug.Log("diff.x[" + this.motorNo + "]=" + diff_rot.eulerAngles.x);
             //Debug.Log("diff.y[" + this.motorNo + "]=" + diff_rot.eulerAngles.y);
             //Debug.Log("diff.z[" + this.motorNo + "]=" + diff_rot.eulerAngles.z);
-            diff = Map360To180(diff_rot.eulerAngles.x);
+            diff = Map360To180(diff_rot.eulerAngles.y);
             this.prevRotation = this.target.localRotation;
             this.deg += diff;
-
         }
         public uint angle = 0;
         public void UpdateSensorValues()
