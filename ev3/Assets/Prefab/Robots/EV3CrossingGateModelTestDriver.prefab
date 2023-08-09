@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 9002059715630439281}
   - component: {fileID: 5172050545108061787}
   - component: {fileID: 5973486510172622235}
+  - component: {fileID: 3274837295123489942}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -370,6 +371,23 @@ MonoBehaviour:
   topic_name: ev3_actuator
   roboname: EV3CrossingGateModel
   leds: 00
+--- !u!114 &3274837295123489942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292412753797116666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976712cb09a5e4b058ba7c027d8adcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  update_cycle: 10
+  topic_name: ev3_actuator
+  roboname: EV3CrossingGateModel
+  delta_vel: 1
+  target_velocity: 0
 --- !u!1 &6120216730410062207
 GameObject:
   m_ObjectHideFlags: 0
