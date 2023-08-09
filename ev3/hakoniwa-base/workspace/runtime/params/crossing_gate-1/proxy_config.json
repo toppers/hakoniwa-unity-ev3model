@@ -1,0 +1,23 @@
+{
+    "asset_name": "athrill-crossing_gate-1",
+    "robo_name": "EV3CrossingGateModel",
+    "target_exec_dir": "/Users/tmori/project/oss/hakoniwa-unity-ev3model/hakoniwa-base/workspace/runtime/run/crossing_gate-1",
+    "target_bin_path": "/usr/local/bin/hakoniwa/athrill2",
+    "target_options": [
+        "-c1",
+        "-t",
+        "-1",
+        "-d",
+        "/Users/tmori/project/oss/hakoniwa-unity-ev3model/hakoniwa-base/workspace/runtime/params/crossing_gate-1/device_config.txt",
+        "-m",
+        "/Users/tmori/project/oss/hakoniwa-unity-ev3model/hakoniwa-base/workspace/runtime/params/crossing_gate-1/memory.txt",
+        "/Users/tmori/project/oss/hakoniwa-unity-ev3model/hakoniwa-base/workspace/dev/src/crossing_gate/asp"
+    ],
+    "target_channels": [
+	    {
+		    "channel_id": 0,
+		    "size": 196
+	    }
+    ]
+}
+
