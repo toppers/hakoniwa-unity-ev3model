@@ -106,6 +106,11 @@ Unityのパッケージマネージャから Newtonsoft.Jsonをインストー�
 
 <img width="794" alt="スクリーンショット 2023-08-05 17 15 16" src="https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/828e3256-7e8b-4677-92b4-55cbb980db0f">
 
+# Unity の各種設定
+
+`Editor/ProjectSettings/Physics` を開き、Friction Type を `One Directional Friction Type` に変更してください。
+
+![スクリーンショット 2023-08-16 7 50 32](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/4098b72c-44d5-4029-80be-9981bfd3e73a)
 
 # シミュレーション環境の準備
 
