@@ -1,6 +1,6 @@
 # Mac環境
 
-- [ ] Intel系 Mac
+- [x] Intel系 Mac
 - [x] Arm系 Mac
 
 # 前提とする環境
