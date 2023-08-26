@@ -218,8 +218,11 @@ Athrill上で動作するプログラムを使ったシミュレーションを�
 
 * workspace/runtime/asset_def.txt
 * workspace/runtime/params/train_slow_stop-1/device_config.txt
+* workspace/runtime/params/crossing_gate-1/device_config.txt
 * workspace/runtime/params/train_slow_stop-1/memory.txt
+* workspace/runtime/params/crossing_gate-1/memory.txt
 * workspace/runtime/params/train_slow_stop-1/proxy_config.json
+* workspace/runtime/params/crossing_gate-1/proxy_config.json
 
 ### workspace/runtime/asset_def.txt
 
@@ -230,7 +233,8 @@ dev/ai/ai_qtable.py
 
 変更後：
 ```
-train_slow_stop:1:
+crossing_gate:1:
+train_slow_stop:1:train.log
 ```
 
 
@@ -245,6 +249,9 @@ DEBUG_FUNC_HAKO_ROBO_NAME       EV3TrainModel
 ```
 DEBUG_FUNC_HAKO_ROBO_NAME       EV3TrainModelWithBaggage
 ```
+### workspace/runtime/params/train_slow_stop-1/device_config.txt
+
+変更不要です。
 
 ### workspace/runtime/params/train_slow_stop-1/memory.txt
 
@@ -259,6 +266,9 @@ DEV,  0x900F0000, /usr/local/lib/hakoniwa/libhakotime.so
 DEV,  0x090F0000, /usr/local/lib/hakoniwa/libhakopdu.dylib
 DEV,  0x900F0000, /usr/local/lib/hakoniwa/libhakotime.dylib
 ```
+### workspace/runtime/params/crossing_gate-1/memory.txt
+
+変更不要です。
 
 ### workspace/runtime/params/train_slow_stop-1/proxy_config.json
 
@@ -280,8 +290,6 @@ DEV,  0x900F0000, /usr/local/lib/hakoniwa/libhakotime.dylib
     ],
 ```
 
-`/Users/tmori/project/oss/hakoniwa-base` は、ご自分の環境に合わせて変更してください。
-
 変更後：
 ```
     "asset_name": "athrill-train_slow_stop-1",
@@ -300,17 +308,58 @@ DEV,  0x900F0000, /usr/local/lib/hakoniwa/libhakotime.dylib
     ],
 ```
 
-次に、以下のコマンドプログラムをビルドします。(train_slow_stopはアプリケーション名です)
+`/Users/tmori/project/oss/hakoniwa-base` は、ご自分の環境に合わせて変更してください。
+
+
+### workspace/runtime/params/crossing_gate-1/proxy_config.json
 
 ```
-bash docker/build.bash train_slow_stop
+{
+    "asset_name": "athrill-crossing_gate-1",
+    "robo_name": "EV3CrossingGateModel",
+    "target_exec_dir": "/Users/tmori/project/oss/hakoniwa-unity-ev3model/hakoniwa-base/workspace/runtime/run/crossing_gate-1",
+    "target_bin_path": "/usr/local/bin/hakoniwa/athrill2",
+    "target_options": [
+        "-c1",
+        "-t",
+        "-1",
+        "-d",
+        "/Users/tmori/project/oss/hakoniwa-unity-ev3model/hakoniwa-base/workspace/runtime/params/crossing_gate-1/device_config.txt",
+        "-m",
+        "/Users/tmori/project/oss/hakoniwa-unity-ev3model/hakoniwa-base/workspace/runtime/params/crossing_gate-1/memory.txt",
+        "/Users/tmori/project/oss/hakoniwa-unity-ev3model/hakoniwa-base/workspace/dev/src/crossing_gate/asp"
+    ],
+    "target_channels": [
+	    {
+		    "channel_id": 0,
+		    "size": 196
+	    }
+    ]
+}
 ```
 
-ただし、事前に以下のコマンドで docker イメージを取得してください。
+`/Users/tmori/project/oss/hakoniwa-base` は、ご自分の環境に合わせて変更してください。
+
+### アプリケーションをビルドする
+
+アプリケーションのビルドは docker コンテナ上で実行します。
+事前に以下のコマンドで docker イメージを取得してください。
 
 ```
 bash docker/pull-image.bash dev
 ```
+
+次に、以下のコマンドプログラムをビルドします。
+
+* train_slow_stop
+* crossing_gate
+
+```
+bash docker/build.bash train_slow_stop
+bash docker/build.bash crossing_gate
+```
+
+### 箱庭を起動する
 
 以下のコマンドで箱庭環境を起動します。
 
@@ -356,5 +405,5 @@ Press ENTER to stop...
 ## シミュレーションを停止する
 
 シミュレーションを停止する場合は、Unityのシミュレーションボタンを押して、Unity側のシミュレーションを終了させます。
-次に、`run.bash`を `Ctrl+C` で停止します。
+次に、`run.bash`のターミナルで Enterキーを押下して停止します。
 
