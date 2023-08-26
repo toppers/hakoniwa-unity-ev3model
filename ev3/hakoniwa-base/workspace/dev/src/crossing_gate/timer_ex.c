@@ -12,12 +12,14 @@ typedef struct _timer_counters_type {
 static timer_counters_type timers[NUM_OF_TIMERS];
 
 void timer_start(int id, int delay) {
+    // fmt_f("timer_started(%d)", id, 4);
     get_tim(&timers[id].timer_start_count);
     timers[id].timer_timedout_count
         = timers[id].timer_start_count + (SYSTIM)delay;
 }
 
 void timer_stop(int id) {
+    // fmt_f("timer_stopped(%d)", id, 4);
     timers[id].timer_start_count = (SYSTIM)0;
 }
 
@@ -26,6 +28,7 @@ int timer_is_started(int id) {
 }
 
 bool timer_is_timedout(int id) {
+    // fmt_f("timer_is_timedout(%d)", id, 4);
     if(timers[id].timer_start_count <= 0 ) {
         return false;
     }

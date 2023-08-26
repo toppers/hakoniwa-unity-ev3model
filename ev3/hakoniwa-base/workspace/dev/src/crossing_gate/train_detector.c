@@ -14,24 +14,37 @@ void train_detector_set_threshold(int threshold) {
   train_detector_threshold = threshold;
 }
 
-static int8_t dist_old = 255;
+static int8_t distance = 255;
+static int8_t saved_distance = 255;
+static bool detected = false;
 
 void train_detector_init(void) {
-  ev3_sensor_config(train_detector_sensor_port, train_detector_sensor_type);
-  dist_old = 0;
-  dly_tsk(1000U * 1000U);
+    ev3_sensor_config(train_detector_sensor_port, train_detector_sensor_type);
+    distance = 255;
+    saved_distance = 255;
+    dly_tsk(500U * 1000U);
 }
 
 // 通過していないときは13, 14 など、通過中は4,5,,,8 などとなる
 // 背が低い車両や、車両間の隙間の対策（一定時間の経過を判定する等）が必要
-// このdetectorを使うには cyc0 の周期は100ms以上にする
+// 周期ハンドラの周期が100ms以上ないときは、呼び出しを間欠的にする
 bool train_detector_is_detected(void) {
-    int8_t distance
-      = ev3_ultrasonic_sensor_get_distance(train_detector_sensor_port);
 
-    if( dist_old != distance ) {
-        fmt_f("dist= %d", distance, 5);
-    }
-    dist_old = distance;
-    return distance < train_detector_threshold;
+    return detected;
 }
+
+void train_detector_run(void) {
+    distance
+        = ev3_ultrasonic_sensor_get_distance(train_detector_sensor_port);
+
+    detected = distance < train_detector_threshold;
+    if( saved_distance != distance ) {
+        if( detected ) {
+            fmt_f("dist= %d (d)", distance, 5);
+        } else {
+            fmt_f("dist= %d (n)", distance, 5);
+        }
+    }
+    saved_distance = distance;
+}
+

@@ -4,28 +4,28 @@
 
 #include "gate_rotator.h"
 
-typedef enum _rotator_state {
-    RS_INIT,
-    RS_OPENED,         // 遮断桿が上がっている（遮断機が開いている）
-    RS_CLOSING,        // 遮断桿を下ろしている（遮断機を閉じつつある）
-    RS_CLOSED,         // 遮断桿が下がっている（遮断機が閉じている）
-    RS_OPENING,        // 遮断桿を上げている（遮断機を開きつつある）
+typedef enum _gate_rotator_state {
+    GRS_INIT,
+    GRS_OPENED,         // 遮断桿が上がっている（遮断機が開いている）
+    GRS_CLOSING,        // 遮断桿を下ろしている（遮断機を閉じつつある）
+    GRS_CLOSED,         // 遮断桿が下がっている（遮断機が閉じている）
+    GRS_OPENING,        // 遮断桿を上げている（遮断機を開きつつある）
     TNUM_ROTATOR_STATE
-} rotator_state;
+} gate_rotator_state;
 
 static char* state_msg[TNUM_ROTATOR_STATE] = {
-    "RS_INIT",
-    "RS_OPEND", "RS_CLOSING",
-    "RS_CLOSED", "RS_OPENING"
+    "GRS_INIT",
+    "GRS_OPENED", "GRS_CLOSING",
+    "GRS_CLOSED", "GRS_OPENING"
 };
 
-static rotator_state rs_state = RS_INIT;
-static bool rs_is_entry = true;
+static gate_rotator_state gr_state = GRS_INIT;
+static bool grs_is_entry = true;
 
-#define ENTRY if(rs_is_entry){rs_is_entry=false;
+#define ENTRY if(grs_is_entry){grs_is_entry=false;
 #define DO }{
-#define EVTCHK(f,s) if((f)){rs_state=(s);rs_is_entry=true;}
-#define EXIT }if(rs_is_entry){
+#define EVTCHK(f,s) if((f)){gr_state=(s);grs_is_entry=true;}
+#define EXIT }if(grs_is_entry){
 #define END }
 
 static const motor_port_t gate1_port = EV3_PORT_A;
@@ -39,26 +39,26 @@ static int16_t rotator_power = ROTATOR_POWER;
 static int16_t gate1_count = 0;
 static int16_t gate2_count = 0;
 
-typedef enum _rotator_go_direction_type {
-    RD_GO_CLOSING, RD_GO_OPENING
-} rotator_go_direction_type;
+typedef enum _gate_rotator_direction_type {
+    GR_DIR_CLOSING, GR_DIR_OPENING
+} gate_rotator_direction_type;
 
-static rotator_go_direction_type go_direction = RD_GO_CLOSING;
+static gate_rotator_direction_type gr_direction = GR_DIR_OPENING;
 
 void gate_rotator_go_opening(void) {
-    go_direction = RD_GO_OPENING;
+    gr_direction = GR_DIR_OPENING;
 }
 
 void gate_rotator_go_closing(void) {
-    go_direction = RD_GO_CLOSING;
+    gr_direction = GR_DIR_CLOSING;
 }
 
 static bool gate_rotator_got_open_request(void) {
-    return go_direction == RD_GO_OPENING;
+    return gr_direction == GR_DIR_OPENING;
 }
 
 static bool gate_rotator_got_close_request(void) {
-    return go_direction == RD_GO_CLOSING;
+    return gr_direction == GR_DIR_CLOSING;
 }
 
 void gate_rotator_init(void) {
@@ -68,9 +68,12 @@ void gate_rotator_init(void) {
     ev3_motor_reset_counts(gate1_port);
     gate1_count = 0;
     gate2_count = 0;
+    gr_state = GRS_INIT;
+    gr_direction = GR_DIR_OPENING;
 }
 
 void gate_rotator_rotate_normal(void) {
+    syslog(LOG_NOTICE, "rotator_power=%d", rotator_power);
     ev3_motor_set_power(gate1_port, rotator_power);
     ev3_motor_set_power(gate2_port, rotator_power);
 
@@ -97,61 +100,65 @@ void gate_rotator_update_counts(void) {
 }
 
 bool gate_rotator_is_closed(void) {
-    if(gate1_count >= ROTATOR_COUNT
-       || gate2_count >= ROTATOR_COUNT) {
+    /* if(gate1_count >= ROTATOR_COUNT  */
+    /*    || gate2_count >= ROTATOR_COUNT) { */
+    if(gate1_count >= ROTATOR_COUNT) {
         return true;
     }
     return false;
 }
 
 bool gate_rotator_is_opened(void) {
-    if(gate1_count <= 0 || gate2_count <= 0 ) {
+    /* if(gate1_count <= 0 || gate2_count <= 0 ) { */
+    if(gate1_count <= 0) {
         return true;
     }
     return false;
 }
 
 void gate_rotator_run(void) {
-    if( rs_is_entry ) { msg_f(state_msg[rs_state], 5); }
     gate_rotator_update_counts();
+    if( grs_is_entry ) {
+        fmt_f2("%s, %d", state_msg[gr_state], gate1_count, 2);
+    }
 
-    switch(rs_state ) {
-    case RS_INIT:
+    switch(gr_state) {
+    case GRS_INIT:
         ENTRY
             gate_rotator_init();
         DO
-        EVTCHK(true,RS_OPENED)
+        EVTCHK(true,GRS_OPENED)
         EXIT
         END
         break;
-    case RS_OPENED:
+    case GRS_OPENED:
         ENTRY
         DO
-        EVTCHK(gate_rotator_got_close_request(),RS_CLOSING)
+        EVTCHK(gate_rotator_got_close_request(),GRS_CLOSING)
         EXIT
         END
         break;
-    case RS_CLOSING:
+    case GRS_CLOSING:
         ENTRY
             gate_rotator_rotate_normal();
         DO
-        EVTCHK(gate_rotator_is_closed(),RS_CLOSED)
+        EVTCHK(gate_rotator_is_closed(),GRS_CLOSED)
         EXIT
             gate_rotator_stop();
         END
         break;
-    case RS_CLOSED:
+    case GRS_CLOSED:
         ENTRY
         DO
-        EVTCHK(gate_rotator_got_open_request(),RS_OPENING)
+        EVTCHK(gate_rotator_got_open_request(),GRS_OPENING)
         EXIT
         END
         break;
-    case RS_OPENING:
+    case GRS_OPENING:
         ENTRY
             gate_rotator_rotate_reverse();
         DO
-        EVTCHK(gate_rotator_is_opened(),RS_OPENED)
+        EVTCHK(gate_rotator_is_opened(),GRS_OPENED)
         EXIT
             gate_rotator_stop();
         END

@@ -8,7 +8,7 @@ static const sensor_port_t train_checker_sensor_A = EV3_PORT_3;
 static const sensor_port_t train_checker_sensor_B = EV3_PORT_2;
 static const sensor_type_t train_checker_sensor_type = COLOR_SENSOR;
 
-#define TC_THRESHOLD 0
+#define TC_THRESHOLD 96
 static int train_checker_threshold_A = TC_THRESHOLD;
 static int train_checker_threshold_B = TC_THRESHOLD;
 
@@ -37,19 +37,21 @@ void train_checker_init(void) {
 
 // 通過していないときの値を設定し、通過中はそれより大きい値か調べる
 bool train_checker_is_detected(sensor_port_t port) {
-    static int8_t chk_old_A = 255;
-    static int8_t chk_old_B = 255;
-    int8_t chk = ev3_color_sensor_get_reflect(port);
+    static uint8_t chk_old_A = 255;
+    static uint8_t chk_old_B = 255;
+    uint8_t chk = ev3_color_sensor_get_reflect(port);
 
     if(port == train_checker_sensor_A) {
         if( chk_old_A != chk ) {
-        fmt_f("chk_A = %d", chk, 3);
-        return chk > train_checker_threshold_A;
+          fmt_f("chk_A = %d", chk, 3);
+          chk_old_A = chk;
+        return chk < train_checker_threshold_A;
         }
     } else if(port == train_checker_sensor_B) {
         if( chk_old_B != chk ) {
-        fmt_f("chk_B = %d", chk, 4);
-        return chk > train_checker_threshold_B;
+          fmt_f("chk_B = %d", chk, 4);
+          chk_old_B = chk;
+        return chk < train_checker_threshold_B;
         }
     }
     return false;

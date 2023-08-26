@@ -13,6 +13,7 @@ extern "C" {
 #ifndef TOPPERS_MACRO_ONLY
 
 extern void main_task(intptr_t exinf);
+extern void sub_task(intptr_t exinf);
 extern void cyc0(intptr_t exinf);
 
 #endif /* TOPPERS_MACRO_ONLY */

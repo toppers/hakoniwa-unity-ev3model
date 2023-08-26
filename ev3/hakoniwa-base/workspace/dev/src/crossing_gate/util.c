@@ -58,3 +58,16 @@ void fmt_f(const char* fmt, const int n, int32_t line) {
     ev3_lcd_draw_string(buf, 0, line * line_height);
     syslog(LOG_NOTICE, buf);
 }
+
+/**
+ * 行単位でコメント付きで引数の数値を表示
+ * @param fmt 編集用文字列(%sと%dをおのおの１つだけ含められる）
+ * @param n 表示する数値
+ * @param line 20ドットごとの行番号（1から5）
+ */
+void fmt_f2(const char* fmt, const char* str, const int n, int32_t line) {
+    sprintf(buf, fmt, str, n);
+    clear_f(line);
+    ev3_lcd_draw_string(buf, 0, line * line_height);
+    syslog(LOG_NOTICE, buf);
+}

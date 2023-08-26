@@ -3,6 +3,7 @@
 
 #include "ev3api.h"
 #include "stdbool.h"
+#include "util.h"
 
 extern void timer_start(int id, int delay_ms);
 extern void timer_stop(int id);
