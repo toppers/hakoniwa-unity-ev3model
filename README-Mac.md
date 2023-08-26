@@ -312,6 +312,38 @@ bash docker/build.bash train_slow_stop
 bash docker/pull-image.bash dev
 ```
 
+以下のコマンドで箱庭環境を起動します。
+
+```
+bash native/template/runtime/ai/mac/run.bash athrill
+```
+
+起動成功すると、以下のログが出力されます。
+
+```
+NFO: ATHRILL MODE
+INFO: ACTIVATING HAKONIWA-CONDUCTOR
+delta_msec = 20
+max_delay_msec = 100
+INFO: shmget() key=255 size=1129352 
+Server Start: 127.0.0.1:50051
+INFO: START crossing_gate-1
+add_option:/usr/local/bin/hakoniwa/athrill2
+add_option:-c1
+add_option:-t
+add_option:-1
+add_option:-d
+add_option:/Users/tmori/project/oss/hakoniwa-unity-ev3model/hakoniwa-base/workspace/runtime/params/crossing_gate-1/device_config.txt
+add_option:-m
+add_option:/Users/tmori/project/oss/hakoniwa-unity-ev3model/hakoniwa-base/workspace/runtime/params/crossing_gate-1/memory.txt
+add_option:/Users/tmori/project/oss/hakoniwa-unity-ev3model/hakoniwa-base/workspace/dev/src/crossing_gate/asp
+INFO: PROXY start
+target_channels: 0 target_channels: 196
+INFO: EV3CrossingGateModel create_lchannel: logical_id=0 real_id=0 size=196
+INFO: START train_slow_stop-1
+START
+Press ENTER to stop...
+```
 
 ## Unityのシミュレーションを開始する
 
