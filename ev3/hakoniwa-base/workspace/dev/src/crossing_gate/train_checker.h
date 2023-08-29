@@ -4,6 +4,7 @@
 #include "ev3api.h"
 #include "stdbool.h"
 #include "util.h"
+#include "target.h"
 
 extern void train_checker_init(void);
 extern void train_checker_caribrate(void);

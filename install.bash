@@ -32,6 +32,8 @@ fi
 
 cp -rp ev3/Assets/* plugin/plugin-srcs/Assets/
 cp -rp ev3/hakoniwa-base/* hakoniwa-base/
+cp ev3/hakoniwa-base/workspace/dev/src/crossing_gate/target_virtual.h hakoniwa-base/workspace/dev/src/crossing_gate/target.h 
+
 if [ ! -d hakoniwa-base/workspace/runtime/run/crossing_gate-1 ]
 then
     mkdir hakoniwa-base/workspace/runtime/run/crossing_gate-1

@@ -73,18 +73,28 @@ void gate_rotator_init(void) {
 }
 
 void gate_rotator_rotate_normal(void) {
-    syslog(LOG_NOTICE, "rotator_power=%d", rotator_power);
-    ev3_motor_set_power(gate1_port, rotator_power);
-    ev3_motor_set_power(gate2_port, rotator_power);
+    // if(gate1_count < ROTATOR_COUNT && gate2_count < ROTATOR_COUNT) {
+    // if(gate1_count < ROTATOR_COUNT || gate2_count < ROTATOR_COUNT) {
+    if(gate1_count < ROTATOR_COUNT) {
+        ev3_motor_set_power(gate1_port, rotator_power);
+        ev3_motor_set_power(gate2_port, rotator_power);
+    } else {
+        gate_rotator_stop();
+    }
 
     /* ev3_motor_rotate(motor_port1, rotator_degree, rotator_speed, false); */
     /* ev3_motor_rotate(motor_port2, rotator_degree, rotator_speed, false); */
 }
 
 void gate_rotator_rotate_reverse(void) {
-    ev3_motor_set_power(gate1_port, -rotator_power);
-    ev3_motor_set_power(gate2_port, -rotator_power);
-
+    // if(gate1_count > 0 && gate2_count > 0) {
+    // if(gate1_count > 0 || gate2_count > 0) {
+    if(gate1_count > 0) {
+        ev3_motor_set_power(gate1_port, -rotator_power);
+        ev3_motor_set_power(gate2_port, -rotator_power);
+    } else {
+        gate_rotator_stop();
+    }
     /* ev3_motor_rotate(motor_port1, -rotator_degree, rotator_speed, false); */
     /* ev3_motor_rotate(motor_port2, -rotator_degree, rotator_speed, false); */
 }

@@ -30,7 +30,7 @@ void horn_at_A(void) {
     ev3_speaker_play_tone(NOTE_E4, duration); /* ミ */
     dly_tsk(duration * 2);
     ev3_speaker_play_tone(NOTE_G4, duration); /* ソ */
-    dly_tsk(duration * 2);    
+    dly_tsk(duration * 2);
     ev3_speaker_stop();
 }
 
@@ -41,7 +41,7 @@ void horn_at_B(void) {
     ev3_speaker_play_tone(NOTE_G4, duration); /* ソ */
     dly_tsk(duration * 2);
     ev3_speaker_play_tone(NOTE_E4, duration); /* ミ */
-    dly_tsk(duration * 2);    
+    dly_tsk(duration * 2);
     ev3_speaker_stop();
 }
 

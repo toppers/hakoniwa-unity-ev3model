@@ -11,6 +11,7 @@ void main_task(intptr_t unused) {
     }
 
     railroad_crossing_run();
+
     ext_tsk();
 }
 

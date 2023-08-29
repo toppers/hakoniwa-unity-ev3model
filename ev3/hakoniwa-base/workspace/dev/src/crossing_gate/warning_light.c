@@ -32,23 +32,23 @@ void warning_light_off(void) {
     wl_state = WL_OFF;
 }
 
-static const int WL_TIMER_ID = 1;
+static const int wl_timer_id = 1;
 
 void warning_light_run(void) {
     static bool is_light_on = true;
 
     switch(wl_state) {
     case WL_FLASHING:
-        if(!timer_is_started(WL_TIMER_ID)) {
-            timer_start(WL_TIMER_ID, 500U * 1000U);
+        if(!timer_is_started(wl_timer_id)) {
+            timer_start(wl_timer_id, 500U * 1000U);
             if(is_light_on) {
                 ev3_motor_stop(light_port, false);
             } else {
                 ev3_motor_set_power(light_port, light_power);
             }
         }
-        if(timer_is_timedout(WL_TIMER_ID)) {
-            timer_stop(WL_TIMER_ID);
+        if(timer_is_timedout(wl_timer_id)) {
+            timer_stop(wl_timer_id);
             is_light_on = !is_light_on;
         }
         break;
