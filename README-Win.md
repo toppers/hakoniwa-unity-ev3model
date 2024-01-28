@@ -36,29 +36,18 @@ cd hakoniwa-unity-ev3model/
 
 以下のダイアログが出ますが、`Continue` してください。
 
-<img width="526" alt="スクリーンショット 2023-08-05 17 02 16" src="https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/ade85aee-b08e-4920-b148-ce3ef09f5545">
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/8677ab91-a1c3-4e3b-8c2a-cecaf4998be0)
 
 
 次に、以下のダイアログが出ますので、`Ignore` してください。
 
-<img width="257" alt="スクリーンショット 2023-08-05 17 03 38" src="https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/6448e882-b0a3-42c1-8a01-398dbcd450dd">
-
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/57e53403-14d9-446f-8f58-7642c1d0615c)
 
 成功するとこうなります。
 
-<img width="1382" alt="スクリーンショット 2023-08-05 17 05 32" src="https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/de7c9fec-1bb2-411b-90b1-71e2577b6cf1">
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/c6cbb179-f977-49d0-9c72-f015a865208d)
 
-起動直後の状態ですと、コンソール上にたくさんエラーが出てる場合があります。原因は以下です。
-
-* Newtonsoft.Json が不足している
-
-
-## Newtonsoft.Json が不足している問題の対応
-
-gRPC の対応をしても、Unityエディタのバージョンによっては、下図のようなエラーが出ている場合があります。
-
-<img width="1046" alt="スクリーンショット 2023-08-05 17 12 38" src="https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/63e7e31b-80d0-447e-9c77-5555293fa685">
-
+起動直後の状態ですと、コンソール上にたくさんエラーが出てる場合があります。
 原因は、Newtonsoft.Json が不足しているためです。 
 
 Unityのパッケージマネージャから Newtonsoft.Jsonをインストールすることで解消できます。
@@ -67,12 +56,6 @@ Unityのパッケージマネージャから Newtonsoft.Jsonをインストー�
 `com.unity.nuget.newtonsoft-json` を入力して、`Add` をクリックすると、インストールが始まり、エラーが解消されます。
 
 <img width="794" alt="スクリーンショット 2023-08-05 17 15 16" src="https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/828e3256-7e8b-4677-92b4-55cbb980db0f">
-
-# Unity の各種設定
-
-`Editor/ProjectSettings/Physics` を開き、Friction Type を `One Directional Friction Type` に変更してください。
-
-![スクリーンショット 2023-08-16 7 50 32](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/4098b72c-44d5-4029-80be-9981bfd3e73a)
 
 # シミュレーション環境の準備
 
