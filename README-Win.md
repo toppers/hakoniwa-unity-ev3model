@@ -61,20 +61,106 @@ Unityのパッケージマネージャから Newtonsoft.Jsonをインストー�
 
 ## Unity側
 
-下図のように、Unity のシーンをダブルクリックします。
+下図のように、Unity のシーン(`Scenes/TrainModel/Hakoniwa`)をダブルクリックします。
 
-<img width="459" alt="スクリーンショット 2023-08-05 17 22 47" src="https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/b3befac6-85dc-4c60-83b5-86259ccb87be">
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/bb3ba7e2-98cb-4a8e-9f9d-1ccde09fbc56)
+
+
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/a6687f1d-65bf-4f74-a6fc-272fe53360fe)
+
 
 そして、｀Window/Hakoniwa/Generate` をクリックします。
 
-<img width="325" alt="スクリーンショット 2023-08-05 17 24 11" src="https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/8eae6801-cc2e-4d05-9c14-c26f6e1bc54d">
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/e0e4119c-004a-4a26-809d-d248399573ae)
+
+成功すると、plugin_srcs 配下に、各種コンフィグファイルが生成されます。
+
+特に、ロボットのコンフィグファイルが以下のようになっていることを確認ください。
+コンフィグデータの仕様は[こちら](https://github.com/toppers/hakoniwa-core-cpp-client?tab=readme-ov-file#%E3%82%B3%E3%83%B3%E3%83%95%E3%82%A3%E3%82%B0%E9%A0%85%E7%9B%AE%E3%81%AE%E8%A9%B3%E7%B4%B0)。
+
+```
+{
+  "robots": [
+    {
+      "name": "EV3TrainModel",
+      "rpc_proxy": {
+        "name": "Athrill",
+        "class_name": "Hakoniwa.PluggableAsset.Assets.Micon.EV3.Ev3MiconAssetController"
+      },
+      "rpc_pdu_readers": [
+        {
+          "type": "ev3_msgs/Ev3PduActuator",
+          "org_name": "ev3_actuator",
+          "name": "EV3TrainModel_ev3_actuator",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReader",
+          "class_path": "",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter",
+          "conv_class_path": "",
+          "channel_id": 0,
+          "pdu_size": 196
+        }
+      ],
+      "rpc_pdu_writers": [
+        {
+          "type": "ev3_msgs/Ev3PduSensor",
+          "org_name": "ev3_sensor",
+          "name": "EV3TrainModel_ev3_sensor",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "class_path": "",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "conv_class_path": "",
+          "channel_id": 1,
+          "pdu_size": 248,
+          "write_cycle": 1,
+          "method_type": "UDP"
+        }
+      ]
+    },
+    {
+      "name": "EV3SignalModel",
+      "rpc_proxy": {
+        "name": "Athrill",
+        "class_name": "Hakoniwa.PluggableAsset.Assets.Micon.EV3.Ev3MiconAssetController"
+      },
+      "rpc_pdu_readers": [
+        {
+          "type": "ev3_msgs/Ev3PduActuator",
+          "org_name": "ev3_actuator",
+          "name": "EV3SignalModel_ev3_actuator",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReader",
+          "class_path": "",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter",
+          "conv_class_path": "",
+          "channel_id": 0,
+          "pdu_size": 196
+        }
+      ],
+      "rpc_pdu_writers": [
+        {
+          "type": "ev3_msgs/Ev3PduSensor",
+          "org_name": "ev3_sensor",
+          "name": "EV3SignalModel_ev3_sensor",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "class_path": "",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "conv_class_path": "",
+          "channel_id": 1,
+          "pdu_size": 248,
+          "write_cycle": 1,
+          "method_type": "UDP"
+        }
+      ]
+    }
+  ]
+}
+```
 
 
 # シミュレーション実行方法
 
 Unityのシーンで、シミュレーション開始ボタンを押すと、下図のように待機状態になります。
 
-<img width="1377" alt="スクリーンショット 2023-08-05 17 36 38" src="https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/894223ba-1ef5-4bc2-ab07-0c164ceef918">
+![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/51a8c8be-f7de-4dd0-83e6-ac46adf37895)
 
 この状態で、STARTボタンを押下すると、ロボットが走り出します。
 
