@@ -69,7 +69,7 @@ Unityのパッケージマネージャから Newtonsoft.Jsonをインストー�
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/a6687f1d-65bf-4f74-a6fc-272fe53360fe)
 
 
-そして、｀Window/Hakoniwa/Generate` をクリックします。
+そして、`Window/Hakoniwa/Generate` をクリックします。
 
 ![image](https://github.com/toppers/hakoniwa-unity-ev3model/assets/164193/e0e4119c-004a-4a26-809d-d248399573ae)
 
